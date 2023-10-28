@@ -94,6 +94,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use("/.netlify/functions/api", router);
 
+// initial route
+
+router.get("/", (req, res) => {
+  res.json("Digital menu api");
+});
+
 // Categories getall
 
 router.get("/categories", (req, res) => {
