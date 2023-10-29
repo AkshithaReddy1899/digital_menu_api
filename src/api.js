@@ -103,7 +103,7 @@ router.get("/", (req, res) => {
 // Categories getall
 
 router.get("/categories", (req, res) => {
-  res.json(categories);
+  res.status(200).json({ message: "Success!", body: categories });
 });
 
 // Add a new categories
@@ -116,7 +116,17 @@ router.post("/categories", (req, res) => {
   };
 
   categories.push(item);
-  res.json(categories);
+
+  if (
+    req.body.name != null &&
+    req.body.name != " " &&
+    req.body.address != null &&
+    req.body.address != " "
+  ) {
+    res.status(200).json({ message: "Success!", body: categories });
+  } else {
+    res.status(404).json({ message: "Missing parameters" });
+  }
 });
 
 // Categories update
@@ -124,15 +134,21 @@ router.post("/categories", (req, res) => {
 router.put("/categories/:id", (req, res) => {
   const item = categories.find((item) => item.id == req.params.id);
 
-  console.log(req.body);
-  console.log(req.body.name);
-
   if (item) {
     item.name = req.body.name;
     item.address = req.body.address;
   }
 
-  res.json(categories);
+  if (
+    req.body.name != null &&
+    req.body.name != " " &&
+    req.body.address != null &&
+    req.body.address != " "
+  ) {
+    res.status(200).json({ message: "Success!", body: categories });
+  } else {
+    res.status(404).json({ message: "Missing parameters" });
+  }
 });
 
 // Categories delete
@@ -141,13 +157,13 @@ router.delete("/categories/:id", (req, res) => {
   const item = categories.find((item) => item.id == req.params.id);
   var list = categories.filter((obj) => obj.id != item.id);
 
-  res.send(list);
+  res.status(200).json({ message: "Success!", body: list });
 });
 
 // menu getall
 
 router.get("/menu", (req, res) => {
-  res.json(menu);
+  res.status(200).json({ message: "Success!", body: menu });
 });
 
 // Add a new item to menu
@@ -161,18 +177,24 @@ router.post("/menu", (req, res) => {
     price: req.body.price,
   };
 
-  console.log(req.body.categoryId);
-
   menu.push(item);
-  res.json(menu);
+
+  if (
+    req.body.name != null &&
+    req.body.categoryId != null &&
+    req.body.description != null &&
+    req.body.price != null
+  ) {
+    res.status(200).json({ message: "Success!", body: menu });
+  } else {
+    res.status(404).json({ message: "Missing parameters" });
+  }
 });
 
 // Update menu
 
 router.put("/menu/:id", (req, res) => {
   const item = menu.find((item) => item.id == req.params.id);
-  console.log(item);
-  console.log(req.body);
 
   if (item) {
     item.name = req.body.name;
@@ -181,7 +203,16 @@ router.put("/menu/:id", (req, res) => {
     item.price = req.body.price;
   }
 
-  res.json(menu);
+  if (
+    req.body.name != null &&
+    req.body.categoryId != null &&
+    req.body.description != null &&
+    req.body.price != null
+  ) {
+    res.status(200).json({ message: "Success!", body: menu });
+  } else {
+    res.status(404).json({ message: "Missing parameters" });
+  }
 });
 
 // Delete item
@@ -190,13 +221,13 @@ router.delete("/menu/:id", (req, res) => {
   const item = menu.find((item) => item.id == req.params.id);
   var list = menu.filter((obj) => obj.id != item.id);
 
-  res.send(list);
+  res.status(200).json({ message: "Success!", body: list });
 });
 
 // Get all orders
 
 router.get("/order", (req, res) => {
-  res.json(orders);
+  res.status(200).json({ message: "Success!", body: orders });
 });
 
 // Add a new order
@@ -208,7 +239,11 @@ router.post("/order", (req, res) => {
   };
 
   orders.push(item);
-  res.json(orders);
+  if (req.body.items != null) {
+    res.status(200).json({ message: "Success!", body: orders });
+  } else {
+    res.status(404).json({ message: "Missing parameters" });
+  }
 });
 
 // Delete order
@@ -217,10 +252,8 @@ router.delete("/order/:id", (req, res) => {
   const item = orders.find((item) => item.id == req.params.id);
   var list = orders.filter((obj) => obj.id != item.id);
 
-  res.send(list);
+  res.status(200).json({ message: "Success!", body: list });
 });
-
-// app.listen(PORT, () => console.log(`server running on ${PORT}`));
 
 module.exports = app;
 module.exports.handler = serverless(app);
