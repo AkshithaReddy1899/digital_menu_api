@@ -7,6 +7,17 @@ const uid = require("uuid");
 const router = express.Router();
 const serverless = require("serverless-http");
 
+const app = express();
+app.use(cors({origin: true}));
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use("/.netlify/functions/api", router);
+
 const categories = ["Main", "Dessert", "Drinks", "Starters", "Breads", "Rice"];
 
 const menu = [
@@ -548,12 +559,6 @@ const orders = [
     ],
   },
 ];
-
-const app = express();
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use("/.netlify/functions/api", router);
 
 router.get("/", (req, res) => {
   res.json("Digital menu api");
