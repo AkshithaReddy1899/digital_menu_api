@@ -530,6 +530,7 @@ const orders = [
         customization: "",
         orderStatus: "Accepted",
       },
+      
     ],
   },
   {
@@ -568,7 +569,7 @@ router.get("/", (req, res) => {
 
 router.get("/categories", (req, res) => {
   console.log(req);
-  res.status(200).json({ message: "Success!", body: categories });
+  res.status(200).json({ message: "Success!", body: {categories : categories} });
 });
 
 // Add a new categories
@@ -579,7 +580,7 @@ router.post("/categories", (req, res) => {
   console.log(req);
   if (req.body.categoryName != null) {
     categories.push(req.body.categoryName);
-    res.status(200).json({ message: "Success!", body: categories });
+    res.status(200).json({ message: "Success!", body: {categories : categories} });
   } else {
     res.status(404).json({ message: "Missing parameters" });
   }
@@ -602,7 +603,7 @@ router.put("/categories/:categoryName", (req, res) => {
   }
 
   if (req.body.categoryName != null && req.body.categoryName != " ") {
-    res.status(200).json({ message: "Success!", body: categories });
+    res.status(200).json({ message: "Success!", body: {categories : categories} });
   } else {
     res.status(404).json({ message: "Missing parameters" });
   }
@@ -620,7 +621,7 @@ if(index >= 0) {
   categories.splice(index, 1);
 }
   if (req.params.categoryName != null && req.params.categoryName != " ") {
-    res.status(200).json({ message: "Success!", body: categories });
+    res.status(200).json({ message: "Success!", body: {categories : categories} });
   } else {
     res.status(404).json({ message: "Missing parameters" });
   }
@@ -629,7 +630,7 @@ if(index >= 0) {
 // menu getall
 
 router.get("/menu", (req, res) => {
-  res.status(200).json({ message: "Success!", body: menu });
+  res.status(200).json({ message: "Success!", body: {menu : menu} });
 });
 
 // Add a new item to menu
@@ -651,7 +652,7 @@ router.post("/menu", (req, res) => {
     req.body.description != null &&
     req.body.price != null
   ) {
-    res.status(200).json({ message: "Success!", body: menu });
+    res.status(200).json({ message: "Success!", body: {menu : menu} });
   } else {
     res.status(404).json({ message: "Missing parameters" });
   }
@@ -677,7 +678,7 @@ router.put("/menu/:id", (req, res) => {
     req.body.description != null &&
     req.body.price != null
   ) {
-    res.status(200).json({ message: "Success!", body: menu });
+    res.status(200).json({ message: "Success!", body: {menu : menu} });
   } else {
     res.status(404).json({ message: "Missing parameters" });
   }
@@ -696,7 +697,7 @@ router.delete("/menu/:id", (req, res) => {
 
   if (req.params.id != null
   ) {
-    res.status(200).json({ message: "Success!", body: menu });
+    res.status(200).json({ message: "Success!", body: {menu : menu} });
   } else {
     res.status(404).json({ message: "Missing parameters" });
   }
@@ -706,7 +707,7 @@ router.delete("/menu/:id", (req, res) => {
 // Get all orders
 
 router.get("/order", (req, res) => {
-  res.status(200).json({ message: "Success!", body: orders });
+  res.status(200).json({ message: "Success!", body: {orders : orders} });
 });
 
 // Add a new order
@@ -724,7 +725,7 @@ router.post("/order", (req, res) => {
 
   orders.push(item);
   if (req.body.items != null) {
-    res.status(200).json({ message: "Success!", body: orders });
+    res.status(200).json({ message: "Success!", body: {orders : orders} });
   } else {
     res.status(404).json({ message: "Missing parameters" });
   }
