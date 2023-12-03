@@ -637,7 +637,7 @@ router.get("/menu", (req, res) => {
 
 router.post("/menu", (req, res) => {
   const item = {
-    id: uid.v1(),
+    id: Date.now(),
     categoryName: req.body.categoryName,
     name: req.body.name,
     description: req.body.description,
@@ -667,7 +667,7 @@ router.put("/menu/:id", (req, res) => {
 
   if (item) {
     item.name = req.body.name;
-    item.categoryId = req.body.categoryId;
+    item.categoryName = req.body.categoryName;
     item.description = req.body.description;
     item.price = req.body.price;
   }
@@ -714,7 +714,7 @@ router.get("/order", (req, res) => {
 
 router.post("/order", (req, res) => {
   const item = {
-    id: uid.v1(),
+    id: Date.now(),
     dateTime : Date.now(),
     items: req.body.items,
   };
