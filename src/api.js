@@ -22,20 +22,6 @@ const categories = ["Main", "Dessert", "Drinks", "Starters", "Breads", "Rice"];
 
 const menu = [
   {
-    id: 0,
-    categoryId: 0,
-    name: "asdf",
-    description: "wertygfv",
-    price: 350.0,
-  },
-  {
-    id: 1,
-    categoryId: 3,
-    name: "asdf@#",
-    description: "wertygfv$#%^&*UYHGf",
-    price: 350.0,
-  },
-  {
     id: 2,
     categoryName: "Main",
     name: "Paneer Majestic",
@@ -505,6 +491,7 @@ const menu = [
   },
 ];
 
+
 const orders = [
   {
     ordersId: 1,
@@ -513,9 +500,9 @@ const orders = [
       {
         categoryName: "Main",
         orderId: 1,
-        name: "asdf",
-        description: "awd",
-        price: 350.0,
+        name: "Kaju Butter MAsala",
+        description: "A buttery, smooth, masala-based curry that features roasted cashew nuts as its main ingredient.",
+        price: 240.0,
         quantity: 1,
         customization: "",
         orderStatus: "Placed",
@@ -523,9 +510,9 @@ const orders = [
       {
         categoryName: "Main",
         orderId: 1,
-        name: "asdf",
-        description: "awd",
-        price: 350.0,
+        name: "Jeera Rice",
+        description: "Steamed white rice tempered with cumin seeds in clarified butter.",
+        price: 180.0,
         quantity: 1,
         customization: "",
         orderStatus: "Accepted",
@@ -538,10 +525,10 @@ const orders = [
     dateTime: 1700118350667,
     items: [
       {
-        categoryName: "Main",
+        categoryName: "Dessert",
         orderId: 2,
-        name: "asdf",
-        description: "awd",
+        name: "Arabian Nights",
+        description: "Nutty Dry fruit flavoured ice cream mixed with premium anjeer and date paste and roasted cashew nuts.",
         price: 350.0,
         quantity: 1,
         customization: "",
@@ -550,10 +537,10 @@ const orders = [
       {
         categoryName: "Dessert",
         orderId: 2,
-        name: "asdf",
-        description: "awd",
-        price: 350.0,
-        quantity: 1,
+        name: "Red Velvet Pastry",
+        description: "Red Velvet Pastry",
+        price: 180.0,
+        quantity: 2,
         customization: "",
         orderStatus: "Accepted",
       },
@@ -733,30 +720,38 @@ router.post("/order", (req, res) => {
 
 // Update order
 
-// router.put("/order/:ordersId", (req, res) => {
-//   const item = orders.find((item) => item.ordersId == req.params.ordersId);
+router.put("/order/:ordersId", (req, res) => {
+  const item = orders.find((item) => item.ordersId == req.params.ordersId);
+  
+  console.log(item);
 
-//   console.log(item);
+  console.log(item['items']);
 
-//   if(item) {
-//     item.categoryName = req.body.categoryName,
-//     item.name = req.body.name,
-//     item.description = req.body.description,
-//     item.price = req.body.price,
-//     item.quantity = req.body.quantity,
-//     item.orderStatus = req.body.orderStatus
-//   }
+  const order = item['items'].find((ord) => ord.name == req.body.name);
 
-//   if (req.body.orderStatus != null
-//   ) {
-//     res.status(200).json({ message: "Success!", body: menu });
-//   } else {
-//     res.status(404).json({ message: "Missing parameters" });
-//   }
 
-//   console.log(item);
 
-// });
+  console.log(item);
+
+  if(order) {
+    order.categoryName = req.body.categoryName,
+    order.name = req.body.name,
+    order.description = req.body.description,
+    order.price = req.body.price,
+    order.quantity = req.body.quantity,
+    order.orderStatus = req.body.orderStatus
+  }
+
+  if (req.body.orderStatus != null
+  ) {
+    res.status(200).json({ message: "Success!", body: orders });
+  } else {
+    res.status(404).json({ message: "Missing parameters" });
+  }
+
+  console.log(item);
+
+});
 
 
 module.exports = app;
