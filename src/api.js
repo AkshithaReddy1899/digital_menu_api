@@ -500,7 +500,8 @@ const orders = [
       {
         categoryName: "Main",
         orderId: 1,
-        name: "Kaju Butter MAsala",
+        id: 5,
+        name: "Kaju Butter Masala",
         description: "A buttery, smooth, masala-based curry that features roasted cashew nuts as its main ingredient.",
         price: 240.0,
         quantity: 1,
@@ -510,6 +511,7 @@ const orders = [
       {
         categoryName: "Main",
         orderId: 1,
+        id: 31,
         name: "Jeera Rice",
         description: "Steamed white rice tempered with cumin seeds in clarified butter.",
         price: 180.0,
@@ -527,6 +529,7 @@ const orders = [
       {
         categoryName: "Dessert",
         orderId: 2,
+        id: 59,
         name: "Arabian Nights",
         description: "Nutty Dry fruit flavoured ice cream mixed with premium anjeer and date paste and roasted cashew nuts.",
         price: 350.0,
@@ -537,6 +540,7 @@ const orders = [
       {
         categoryName: "Dessert",
         orderId: 2,
+        id: 61,
         name: "Red Velvet Pastry",
         description: "Red Velvet Pastry",
         price: 180.0,
