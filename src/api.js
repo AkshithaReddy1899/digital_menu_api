@@ -731,7 +731,7 @@ router.put("/order/:ordersId", (req, res) => {
 
   console.log(item['items']);
 
-  const order = item['items'].find((ord) => ord.name == req.body.name);
+  const order = item['items'].find((ord) => ord.id == req.body.id);
 
 
 
