@@ -726,24 +726,9 @@ router.post("/order", (req, res) => {
 
 router.put("/order/:ordersId", (req, res) => {
   const item = orders.find((item) => item.ordersId == req.params.ordersId);
-  
-  console.log(item);
-
-  console.log(item['items']);
-
   const order = item['items'].find((ord) => ord.id == req.body.id);
-
-
-
-  console.log(item);
-
   if(order) {
-    order.categoryName = req.body.categoryName,
-    order.name = req.body.name,
-    order.description = req.body.description,
-    order.price = req.body.price,
-    order.quantity = req.body.quantity,
-    order.orderStatus = req.body.orderStatus
+   order.orderStatus = req.body.orderStatus
   }
 
   if (req.body.orderStatus != null
@@ -752,9 +737,6 @@ router.put("/order/:ordersId", (req, res) => {
   } else {
     res.status(404).json({ message: "Missing parameters" });
   }
-
-  console.log(item);
-
 });
 
 
