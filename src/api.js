@@ -559,16 +559,12 @@ router.get("/", (req, res) => {
 // Categories getall
 
 router.get("/categories", (req, res) => {
-  console.log(req);
   res.status(200).json({ message: "Success!", object: {categories : categories} });
 });
 
 // Add a new categories
 
 router.post("/categories", (req, res) => {
-  console.log(req.body.categoryName);
-
-  console.log(req);
   if (req.body.categoryName != null) {
     categories.push(req.body.categoryName);
     res.status(200).json({ message: "Success!", object: {categories : categories} });
@@ -588,9 +584,7 @@ router.put("/categories/:categoryName", (req, res) => {
   }
 
   if(index >= 0) {
-   console.log(categories[index]);
     categories[index] = req.body.categoryName;
-    console.log(categories[index]);
   }
 
   if (req.body.categoryName != null && req.body.categoryName != " ") {
@@ -653,8 +647,6 @@ router.post("/menu", (req, res) => {
 
 router.put("/menu/:id", (req, res) => {
   const item = menu.find((item) => item.id == req.params.id);
-
-  console.log(item);
 
   if (item) {
     item.name = req.body.name;
